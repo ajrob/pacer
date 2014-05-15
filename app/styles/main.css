@@ -1,7 +1,7 @@
 /* Space out content a bit */
 body {
-  padding-top: 20px;
   padding-bottom: 20px;
+  background-color: #F1EDD5;/* #FAE15B; /*#1F5C53*/
 }
 
 /* Everything but the jumbotron gets side spacing for mobile first views */
@@ -76,4 +76,14 @@ body {
   .jumbotron {
     border-bottom: 0;
   }
+}
+
+/********* Start custom styling *************/
+.pace-input {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.pace-row {
+  margin-top: 33%;
 }
