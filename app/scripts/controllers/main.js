@@ -47,12 +47,30 @@ angular.module('pacerApp')
     function doCalculation(){
       if($scope.pacerVariables.distance.isOperand && $scope.pacerVariables.rate.isOperand){
         calculateDuration();
+        return true;
       } else if($scope.pacerVariables.distance.isOperand && $scope.pacerVariables.duration.isOperand){
         calculateRate();
+        return true;
       } else if($scope.pacerVariables.rate.isOperand && $scope.pacerVariables.duration.isOperand){
         calculateDistance();
+        return true;
       }
+      return false;
     }
+
+    function formMessage () {
+      //At 8 min/mi, it will take 10 hours to go 10 miles --> rate is known
+      if($scope.pacerVariables.rate.isOperand){
+        return "At " + $scope.pacerVariables.rate.number + " --unit of speed--, " +
+                "it will take " + $scope.pacerVariables.duration.number + " --unit of time-- " +
+                "to go " + $scope.pacerVariables.distance.number + "--unit of distance--";
+      } else {
+        return "To go " + $scope.pacerVariables.distance.number + " --unit of distance--, " +
+                "it will take " + $scope.pacerVariables.duration.number + " --unit of time-- " +
+                "to go " + $scope.pacerVariables.rate.number + "--unit of speed--";
+      }
+      //To go 10 miles, it will take 10 hours at 8 min/mi --> rate isn't known
+    };
 
     var expressionArray = [];
     $scope.paceValuesChanged = function(paceVariable){
@@ -67,6 +85,9 @@ angular.module('pacerApp')
 
       $scope.pacerVariables[paceVariable].isOperand = true; //Set to operand
 
-      doCalculation();
+      if(doCalculation()){
+        $scope.resultMessage = formMessage();
+      }
+      
     };
   });
