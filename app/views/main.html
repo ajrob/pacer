@@ -8,14 +8,17 @@
             ng-model="pacerVariables.distance.number"
             ng-change="paceValuesChanged('distance')"/>
           <!-- <span>Target rate <a href="#"><i class="fa fa-check-circle-o"></i></a></span> -->
-          <input type="text" class="form-control pace-input" placeholder="Rate"
+          <input type="text" class="form-control pace-input" placeholder="hh:mm:ss"
+            ui-mask="99:H9:H9"
             ng-model="pacerVariables.rate.number" 
             ng-change="paceValuesChanged('rate')">
           <!-- <span>Target duration <a href="#"><i class="fa fa-check-circle-o"></i></a></span> -->
-          <input type="text" class="form-control pace-input" placeholder="Duration"
+          <input type="text" class="form-control pace-input" placeholder="hh:mm:ss"
+            ui-mask="99:H9:H9"
             ng-model="pacerVariables.duration.number"
             ng-change="paceValuesChanged('duration')">
           <button class="btn btn-primary" type="button" ng-click="reset()">Reset</button>
+          <button class="btn btn-success pull-right" ng-click="runCalculation()" ng-disabled="disableCalculation">Run!</button>
         </form>
       </div>
     </div>
