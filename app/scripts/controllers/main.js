@@ -1,7 +1,11 @@
 'use strict';
 
 angular.module('pacerApp', ['ui.mask'])
-  .controller('MainCtrl', function ($scope, $filter, uiMaskConfig, CalculationService) {
+  .controller('MainCtrl', function ($scope,
+    $filter, 
+    uiMaskConfig,
+    CalculationService,
+    ConversionService) {
     // uiMaskConfig allows for configuring the types of input
 
     //Configure uiMaskConfig for hour (H). Do not allow minutes or seconds over 60
@@ -17,9 +21,23 @@ angular.module('pacerApp', ['ui.mask'])
 
       var numOperands = 0;
 
-      $scope.pacerVariables[paceVariable].isOperand = true; //Set to operand
+      if ((typeof $scope.pacerVariables[paceVariable].number) == 'string' &&
+          $scope.pacerVariables[paceVariable].number != '') {
+        $scope.pacerVariables[paceVariable].isOperand = true; //Set to operand
+        //Check to see if paceVariable needs to be converted from a time format
+        // -->Check "duration" and "rate"
+        if(paceVariable == 'duration' || paceVariable == 'rate'){
+          // Convert to hours, minutes, seconds
+          console.log(ConversionService.convertTimeBlock($scope.pacerVariables[paceVariable].number).toTotalSeconds);
+          console.log(ConversionService.convertSeconds(
+            ConversionService.convertTimeBlock($scope.pacerVariables[paceVariable].number).toTotalSeconds
+            ).toMinutes());
+          console.log(ConversionService.convertMinutes(60).toHours());
+        }
+      };
 
       for (var key in $scope.pacerVariables){
+        //Add the total number of operands
         numOperands += $scope.pacerVariables[key].isOperand;
       };
       if(numOperands == 2){
@@ -49,13 +67,15 @@ angular.module('pacerApp', ['ui.mask'])
       }
     };
 
-    $scope.unitDuration = "hours",
-    $scope.unitDistance = "miles",
-    $scope.unitRate = "min/mi";
+    $scope.unit = {
+      duration: "hours",
+      distance: "miles",
+      rate: "min/mi"
+    }
 
     var _distance = $scope.pacerVariables.distance,
-        _rate = $scope.pacerVariables.rate,
-        _duration = $scope.pacerVariables.duration;
+        _rate = $scope.pacerVariables.rate, // Input: min/mi
+        _duration = $scope.pacerVariables.duration; // Input: hhmmss string
 
     var pacerEvaluation = [];
 
@@ -83,13 +103,13 @@ angular.module('pacerApp', ['ui.mask'])
     function formMessage () {
       //At 8 min/mi, it will take 10 hours to go 10 miles --> rate is known
       if(_rate.isOperand){
-        return "At " + _rate.number + " " + $scope.unitRate + ", " +
-                "it will take " + _duration.number + " " + $scope.unitDuration + " " +
-                "to go " + _distance.number + " " + $scope.unitDistance;
+        return "At " + _rate.number + " " + $scope.unit.rate + ", " +
+                "it will take " + _duration.number + " " + $scope.unit.duration + " " +
+                "to go " + _distance.number + " " + $scope.unit.distance;
       } else {
-        return "To go " + _distance.number + " " + $scope.unitDistance + ", " +
-                "it will take " + _duration.number + " " + $scope.unitDuration + " " +
-                "to go " + _rate.number + " " + $scope.unitRate;
+        return "To go " + _distance.number + " " + $scope.unit.distance + ", " +
+                "it will take " + _duration.number + " " + $scope.unit.duration + " " +
+                "to go " + _rate.number + " " + $scope.unit.rate;
       }
       //To go 10 miles, it will take 10 hours at 8 min/mi --> rate isn't known
     };
