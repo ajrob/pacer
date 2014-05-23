@@ -21,10 +21,21 @@ angular.module('pacerApp')
     			toTotalSeconds: _totalSeconds
     		}
     	},
-    	convertSeconds: function(seconds){
+    	convertSeconds: function(totalSeconds){
     		return {
     			toMinutes: function(){
-	    			return seconds / 60;
+	    			return totalSeconds / 60;
+	    		},
+	    		toTimeBlock: function(){
+	    			// Do some nifty modulo math
+	    			var _seconds = Math.floor(totalSeconds % 60),
+	    					_minutes = Math.floor((totalSeconds / 60) % 60),
+	    					_hours = Math.floor(totalSeconds / 3600);
+	    			return {
+	    				hours: _hours,
+	    				minutes: _minutes,
+	    				seconds: _seconds
+	    			}
 	    		}
     		}
     	},
