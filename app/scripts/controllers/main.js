@@ -14,15 +14,18 @@ angular.module('pacerApp', ['ui.mask'])
     $scope.pacerVariables = {
       distance: {
         number: null,
-        isOperand: false
+        isOperand: false,
+        isDisabled: false
       },
       rate: {
         number: null,
-        isOperand: false
+        isOperand: false,
+        isDisabled: false
       },
       duration: {
         number: null,
-        isOperand: false
+        isOperand: false,
+        isDisabled: false
       }
     };
 
@@ -56,7 +59,7 @@ angular.module('pacerApp', ['ui.mask'])
     $scope.disableCalculation = true;
 
     $scope.reset = function(){
-      resetOperands();
+      resetInputVariables();
 
     };
     $scope.paceValuesChanged = function(paceVariable){
@@ -89,6 +92,12 @@ angular.module('pacerApp', ['ui.mask'])
       };
       if(numOperands == 2){
         //TODO: Gray out the input box
+        for (var key in $scope.pacerVariables){
+          // Determine which input box is not an operand
+          if(!$scope.pacerVariables[key].isOperand){
+            $scope.pacerVariables[key].isDisabled = true;
+          }
+        };
         $scope.disableCalculation = false;
       }
     };
@@ -99,10 +108,11 @@ angular.module('pacerApp', ['ui.mask'])
       }
     };
 
-    function resetOperands(){
+    function resetInputVariables(){
       _.each($scope.pacerVariables, function(val){
         val.isOperand = false;
         val.number = "";
+        val.isDisabled = false;
       });
     };
 

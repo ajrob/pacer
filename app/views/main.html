@@ -6,17 +6,20 @@
           <!-- <span>Target distance <a href="#"><i class="fa fa-check-circle-o fa-check-circle" ng-class=""></i></a></span> -->
           <input type="text" class="form-control pace-input" placeholder="Distance"
             ng-model="pacerVariables.distance.number"
-            ng-change="paceValuesChanged('distance')">
+            ng-change="paceValuesChanged('distance')"
+            ng-disabled="pacerVariables.distance.isDisabled">
           <!-- <span>Target rate <a href="#"><i class="fa fa-check-circle-o"></i></a></span> -->
           <input type="text" class="form-control pace-input" placeholder="hh:mm:ss"
             ui-mask="99:H9:H9"
             ng-model="pacerVariables.rate.number" 
-            ng-change="paceValuesChanged('rate')">
+            ng-change="paceValuesChanged('rate')"
+            ng-disabled="pacerVariables.rate.isDisabled">
           <!-- <span>Target duration <a href="#"><i class="fa fa-check-circle-o"></i></a></span> -->
           <input type="text" class="form-control pace-input" placeholder="hh:mm:ss"
             ui-mask="99:H9:H9"
             ng-model="pacerVariables.duration.number"
-            ng-change="paceValuesChanged('duration')">
+            ng-change="paceValuesChanged('duration')"
+            ng-disabled="pacerVariables.duration.isDisabled">
           <button class="btn btn-primary" type="button" ng-click="reset()">Reset</button>
           <button class="btn btn-success pull-right" ng-click="runCalculation()" ng-disabled="disableCalculation">Run!</button>
         </form>
