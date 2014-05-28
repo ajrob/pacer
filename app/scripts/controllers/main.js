@@ -5,7 +5,8 @@ angular.module('pacerApp', ['ui.mask'])
     $filter, 
     uiMaskConfig,
     CalculationService,
-    ConversionService) {
+    ConversionService,
+    MessageService) {
     // uiMaskConfig allows for configuring the types of input
 
     //Configure uiMaskConfig for hour (H). Do not allow minutes or seconds over 60
@@ -32,8 +33,7 @@ angular.module('pacerApp', ['ui.mask'])
     };
 
     $scope.unit = {
-      duration: "hours",
-      distance: "miles",
+      distance: "mile",
       rate: "min/mi"
     }
 
@@ -63,7 +63,9 @@ angular.module('pacerApp', ['ui.mask'])
     $scope.reset = function(){
       resetInputVariables();
       $scope.disableCalculation = true;
+      $scope.resultMessage = '';
     };
+    
     $scope.paceValuesChanged = function(paceVariable){
 
       var numOperands = 0;
@@ -108,7 +110,6 @@ angular.module('pacerApp', ['ui.mask'])
         numOperands += $scope.pacerVariables[key].isOperand;
       };
       if(numOperands == 2){
-        //TODO: Gray out the input box
         for (var key in $scope.pacerVariables){
           // Determine which input box is not an operand
           if(!$scope.pacerVariables[key].isOperand){
@@ -121,7 +122,7 @@ angular.module('pacerApp', ['ui.mask'])
 
     $scope.runCalculation = function(){
       if(doCalculation()){
-        $scope.resultMessage = formMessage();
+        $scope.resultMessage = MessageService.formMessage(_rate.isOperand, rate, _distance, duration, $scope.unit);
       }
     };
 
@@ -134,7 +135,6 @@ angular.module('pacerApp', ['ui.mask'])
     };
 
     function doCalculation(){
-
       if(_distance.isOperand && _rate.isOperand){
         duration.totalSeconds = CalculationService.calculateDuration(rate.totalSecondsReciprocal, _distance.number);
         duration.timeBlock = ConversionService.convertSeconds(duration.totalSeconds).toTimeBlock();
@@ -153,18 +153,4 @@ angular.module('pacerApp', ['ui.mask'])
       }
       return false;
     }
-
-    function formMessage () {
-      //At 8 min/mi, it will take 10 hours to go 10 miles --> rate is known
-      if(_rate.isOperand){
-        return "At " + rate.timeBlock.hours + " hrs, " + rate.timeBlock.minutes + " mins, " + rate.timeBlock.seconds + " secs " + $scope.unit.rate + ", " +
-                "it will take " + duration.timeBlock.hours + " hrs, " + duration.timeBlock.minutes + " mins, " + duration.timeBlock.seconds + "secs " +
-                "to go " + _distance.number + " " + $scope.unit.distance;
-      } else {
-        return "To go " + _distance.number + " " + $scope.unit.distance + " " +
-                "in " + duration.timeBlock.hours + " hrs, " + duration.timeBlock.minutes + " mins, " + duration.timeBlock.seconds + " secs " +
-                "you will need to go at a " + rate.timeBlock.hours + ":" + rate.timeBlock.minutes + ":" + rate.timeBlock.seconds + " per mile pace.";
-      }
-      //To go 10 miles, it will take 10 hours at 8 min/mi --> rate isn't known
-    };
   });
