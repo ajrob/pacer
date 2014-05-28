@@ -11,6 +11,8 @@ angular.module('pacerApp', ['ui.mask'])
     //Configure uiMaskConfig for hour (H). Do not allow minutes or seconds over 60
     uiMaskConfig.maskDefinitions['H'] = /[0-5]/;
 
+    $scope.paceInputForm = '';
+
     $scope.pacerVariables = {
       distance: {
         number: null,
@@ -60,13 +62,28 @@ angular.module('pacerApp', ['ui.mask'])
 
     $scope.reset = function(){
       resetInputVariables();
-
+      $scope.disableCalculation = true;
     };
     $scope.paceValuesChanged = function(paceVariable){
 
       var numOperands = 0;
 
-      if ((typeof $scope.pacerVariables[paceVariable].number) == 'string' &&
+      // If the value was an operand but is now empty, reset isOperand to false
+      if ($scope.pacerVariables[paceVariable].isOperand && $scope.paceInputForm[paceVariable].$modelValue == '') {
+        $scope.pacerVariables[paceVariable].isOperand = false;
+      };
+
+      // If the input value is invalid AND it's not $pristine (has already been touched)
+      if ($scope.paceInputForm[paceVariable].$invalid && !$scope.paceInputForm[paceVariable].$pristine) {
+        //Not a valid number
+        //Set isOperand to false
+        $scope.pacerVariables.distance.isOperand = false;
+        //Disable Run button
+        $scope.disableCalculation = true;
+      };
+
+      // If the input is valid AND it's not empty
+      if ($scope.paceInputForm[paceVariable].$valid &&
           $scope.pacerVariables[paceVariable].number != '') {
         //Set to operand
         $scope.pacerVariables[paceVariable].isOperand = true;

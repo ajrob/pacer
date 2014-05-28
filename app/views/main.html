@@ -2,20 +2,22 @@
   <div class="col-md-4" style="border-right: 1px solid black; height: 100%">
     <div class="panel panel-default">
       <div class="panel-body">
-        <form>
+        <form name="paceInputForm">
           <!-- <span>Target distance <a href="#"><i class="fa fa-check-circle-o fa-check-circle" ng-class=""></i></a></span> -->
-          <input type="text" class="form-control pace-input" placeholder="Distance"
+          <input name="distance" type="text" class="form-control pace-input" placeholder="Distance"
+            ng-pattern=/^[0-9]*(\.[0-9]+)?$/
             ng-model="pacerVariables.distance.number"
             ng-change="paceValuesChanged('distance')"
             ng-disabled="pacerVariables.distance.isDisabled">
+            <!-- <p ng-show="paceInputForm.distance.$invalid && !paceInputForm.distance.$pristine">Not a number!</p> -->
           <!-- <span>Target rate <a href="#"><i class="fa fa-check-circle-o"></i></a></span> -->
-          <input type="text" class="form-control pace-input" placeholder="hh:mm:ss"
+          <input name="rate" type="text" class="form-control pace-input" placeholder="hh:mm:ss"
             ui-mask="99:H9:H9"
             ng-model="pacerVariables.rate.number" 
             ng-change="paceValuesChanged('rate')"
             ng-disabled="pacerVariables.rate.isDisabled">
           <!-- <span>Target duration <a href="#"><i class="fa fa-check-circle-o"></i></a></span> -->
-          <input type="text" class="form-control pace-input" placeholder="hh:mm:ss"
+          <input name="duration" type="text" class="form-control pace-input" placeholder="hh:mm:ss"
             ui-mask="99:H9:H9"
             ng-model="pacerVariables.duration.number"
             ng-change="paceValuesChanged('duration')"
