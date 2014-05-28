@@ -77,7 +77,7 @@ angular.module('pacerApp', ['ui.mask'])
       if ($scope.paceInputForm[paceVariable].$invalid && !$scope.paceInputForm[paceVariable].$pristine) {
         //Not a valid number
         //Set isOperand to false
-        $scope.pacerVariables.distance.isOperand = false;
+        $scope.pacerVariables[paceVariable].isOperand = false;
         //Disable Run button
         $scope.disableCalculation = true;
       };
