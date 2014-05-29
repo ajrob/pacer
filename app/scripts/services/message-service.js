@@ -19,7 +19,7 @@ angular.module('pacerApp')
 	      	if(rate.timeBlock.hours > 0){
 	      		rateMessageFragment +=  rate.timeBlock.hours + ":";
 	      	}
-	      	if (rate.timeBlock.minutes > 0 && rate.timeBlock.minutes < 10 && rate.timeBlock.hours > 0) {
+	      	if (rate.timeBlock.minutes >= 0 && rate.timeBlock.minutes < 10 && rate.timeBlock.hours > 0) {
 	      		rateMessageFragment += "0" + rate.timeBlock.minutes + ":";
 	      	} else {
 	      		rateMessageFragment += rate.timeBlock.minutes + ":";
