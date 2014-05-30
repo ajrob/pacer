@@ -1,7 +1,7 @@
 /* Space out content a bit */
 body {
   padding-bottom: 20px;
-  background-color: #1C0048;/* #F1EDD5;/* #FAE15B; /*#1F5C53*/
+  background-color: #fff;/*#1C0048;/* #F1EDD5;/* #FAE15B; /*#1F5C53*/
 }
 
 /* Everything but the jumbotron gets side spacing for mobile first views */
@@ -80,10 +80,34 @@ body {
 
 /********* Start custom styling *************/
 .pace-input {
-  margin-top: 20px;
-  margin-bottom: 20px;
+  /*margin-top: 20px;
+  margin-bottom: 20px;*/
 }
 
 .pace-row {
   margin-top: 33%;
+}
+
+.input-error, .input-error:focus {
+  box-shadow: 0 0 8px rgba(255, 0, 0, 0.6);
+  border-color: red;
+  color: red;
+}
+
+.error {
+  color: red;
+}
+
+.distance-input-container {
+  width: 10em;
+}
+
+.rate-input-container {
+  width: 10em;
+  margin-left: 20px;
+}
+
+.duration-input-container {
+  width: 10em;
+  margin-left: 40px;
 }
