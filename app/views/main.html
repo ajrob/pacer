@@ -1,55 +1,71 @@
-<div class="row pace-row" ng-controller="MainCtrl">
-  <div class="col-md-4">
-        <form name="paceInputForm">
-          <div class="form-group distance-input-container">
-            <label for="distance">Distance</label>
-            <input name="distance" type="text" class="form-control pace-input" placeholder="Distance" autofocus
+<div class="pace-row container" ng-controller="MainCtrl">
+  <div class="choice text-center"><h2>What do you know?</h2></div>
+  <div class="row active-row">
+    
+  </div>
+  <div class="row choice-row">
+    <form name="paceInputForm">
+        <div class="form-group distance-input-container" ng-class="{'col-md-4': true}">
+          <label for="distance">Distance</label>
+          <div class="input-group">
+            <input name="distance" type="text" class="form-control pace-input" placeholder="Distance"
               ng-pattern=/^[0-9]*(\.[0-9]+)?$/
               ng-model="pacerVariables.distance.number"
               ng-change="paceValuesChanged('distance')"
               ng-disabled="pacerVariables.distance.isDisabled"
               ng-class="{'input-error': paceInputForm.distance.$invalid}">
-              <span class="error" ng-show="paceInputForm.distance.$invalid">
-                <small>Invalid distance!</small>
-              </span>
+            <span class="input-group-addon commit"><i class="fa fa-check"></i></span>
           </div>
-            <!-- <p ng-show="paceInputForm.distance.$invalid && !paceInputForm.distance.$pristine">Not a number!</p> -->
-          <!-- <span>Target rate <a href="#"><i class="fa fa-check-circle-o"></i></a></span> -->
-          <div class="rate-input-container">
-            <div class="form-group">
-              <label for="rate">Pace</label>
+          <span class="error" ng-show="paceInputForm.distance.$invalid">
+            <small>Invalid distance!</small>
+          </span>
+        </div>
+        <!-- <p ng-show="paceInputForm.distance.$invalid && !paceInputForm.distance.$pristine">Not a number!</p> -->
+      <!-- <span>Target rate <a href="#"><i class="fa fa-check-circle-o"></i></a></span> -->
+        <div class="rate-input-container col-md-4">
+          <div class="form-group">
+            <label for="rate">Pace</label>
+            <div class="input-group">
               <input name="rate" type="text" class="form-control pace-input" placeholder="hh:mm:ss"
                 ui-mask="99:H9:H9"
                 ng-model="pacerVariables.rate.number" 
                 ng-change="paceValuesChanged('rate')"
                 ng-disabled="pacerVariables.rate.isDisabled">
+              <span class="input-group-addon commit"><i class="fa fa-check"></i></span>
             </div>
           </div>
-          <!-- <span>Target duration <a href="#"><i class="fa fa-check-circle-o"></i></a></span> -->
-          <div class="duration-input-container">
-            <div class="form-group">
-              <label for="duration">Duration</label>
+        </div>
+      <!-- <span>Target duration <a href="#"><i class="fa fa-check-circle-o"></i></a></span> -->
+        <div class="duration-input-container col-md-4">
+          <div class="form-group">
+            <label for="duration">Duration</label>
+            <div class="input-group">
               <input name="duration" type="text" class="form-control pace-input" placeholder="hh:mm:ss"
                 ui-mask="99:H9:H9"
                 ng-model="pacerVariables.duration.number"
                 ng-change="paceValuesChanged('duration')"
                 ng-disabled="pacerVariables.duration.isDisabled">
+              <span class="input-group-addon commit"><i class="fa fa-check"></i></span>
             </div>
           </div>
-          <button class="btn btn-default" type="button" ng-click="reset()">Reset</button>
-          <button class="btn btn-success pull-right" ng-click="runCalculation()" ng-disabled="disableCalculation">Run!</button>
-        </form>
+        </div>
+    </form>
   </div>
-  <div class="col-md-8">
-    <div class="well well-lg">
-      <p>{{ resultMessage }}</p>
-      <h4>Distance: <small>{{ pacerVariables.distance.number }}</small></h4>
-      <h4>Rate: <small>{{ pacerVariables.rate.number }}</small></h4>
-      <h4>Duration: <small>{{ pacerVariables.duration.number }}</small></h4>
-    </div>
+  <div class="row">
+    <button class="btn btn-default" type="button" ng-click="reset()">Reset</button>
+    <button class="btn btn-success pull-right" ng-click="runCalculation()" ng-disabled="disableCalculation">Run!</button>
+  </div>
+  <div class="well well-lg" ng-show="resultMessage">
+    <p>{{ resultMessage }}</p>
+    <h4>Distance: <small>{{ pacerVariables.distance.number }}</small></h4>
+    <h4>Rate: <small>{{ pacerVariables.rate.number }}</small></h4>
+    <h4>Duration: <small>{{ pacerVariables.duration.number }}</small></h4>
   </div>
 </div>
-<table class="table table-striped table-hover table-condensed table-bordered">
+<div class="checkbox">
+  <label><input type="checkbox" ng-model="showSplits" > Splits</label>
+</div>
+<table ng-show="showSplits" class="table table-striped table-hover table-condensed table-bordered">
     <tbody>
       <tr>
         <th>Mile</th>

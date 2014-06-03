@@ -1,7 +1,7 @@
 /* Space out content a bit */
 body {
   padding-bottom: 20px;
-  background-color: #fff;/*#1C0048;/* #F1EDD5;/* #FAE15B; /*#1F5C53*/
+  background-color: orange;
 }
 
 /* Everything but the jumbotron gets side spacing for mobile first views */
@@ -79,6 +79,15 @@ body {
 }
 
 /********* Start custom styling *************/
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: 'Questrial';
+}
 .pace-input {
   /*margin-top: 20px;
   margin-bottom: 20px;*/
@@ -99,15 +108,21 @@ body {
 }
 
 .distance-input-container {
-  width: 10em;
+  /*width: 10em;*/
 }
 
 .rate-input-container {
-  width: 10em;
-  margin-left: 20px;
+  /*width: 10em;*/
 }
 
 .duration-input-container {
-  width: 10em;
-  margin-left: 40px;
+  /*width: 10em;*/
+}
+
+.commit:hover {
+  color: green;
+}
+
+.input-group-addon:hover {
+  background-color: greenyellow;
 }
