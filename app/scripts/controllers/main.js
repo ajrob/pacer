@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('pacerApp', ['ui.mask'])
+angular.module('pacerApp', ['ui.mask', 'ngAnimate'])
   .controller('MainCtrl', function ($scope,
     $filter, 
     uiMaskConfig,
