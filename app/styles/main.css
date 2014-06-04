@@ -1,7 +1,19 @@
 /* Space out content a bit */
+html {
+  height: 100%;
+}
 body {
   padding-bottom: 20px;
-  background-color: orange;
+  /*background-color: orange;*/
+  background-image:
+    linear-gradient(
+      to top right, 
+      #FE981C, #E34200
+    );
+  height: 100%;
+  margin: 0;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
 }
 
 /* Everything but the jumbotron gets side spacing for mobile first views */
@@ -125,17 +137,17 @@ h6 {
 }
 
 .distance-input-container {
-  top: 75px;
+  top: 0px;
   left: 0%;
 }
 
 .rate-input-container {
-  top: 75px;
+  top: 0px;
   left: 33%;
 }
 
 .duration-input-container {
-  top: 75px;
+  top: 0px;
   left: 66%;
 }
 
@@ -145,10 +157,12 @@ h6 {
   width: 100%;
 }
 .stage.focused-on-distance .rate-input-container {
+  top: 75px;
   opacity: 0.5;
   left: 17%;
 }
 .stage.focused-on-distance .duration-input-container {
+  top: 75px;
   opacity: 0.5;
   left: 50%;
 }
@@ -160,27 +174,68 @@ h6 {
   left: 0%;
 }
 .stage.focused-on-rate .distance-input-container {
+  top: 75px;
   opacity: 0.5;
   left: 17%;
 }
 .stage.focused-on-rate .duration-input-container {
+  top: 75px;
   opacity: 0.5;
   left: 50%;
 }
 
 /* Duration is focused */
+
 .stage.focused-on-duration .duration-input-container {
   top: 0px;
   width: 100%;
   left: 0%;
 }
 .stage.focused-on-duration .distance-input-container {
+  top: 75px;
   opacity: 0.5;
   left: 17%;
 }
 .stage.focused-on-duration .rate-input-container {
+  top: 75px;
   opacity: 0.5;
   left: 50%;
+}
+
+/***************/
+/* Show splits */
+
+.sample-show-hide {
+  padding:10px;
+  border:1px solid black;
+  background:white;
+}
+
+.sample-show-hide.ng-hide-add, .sample-show-hide.ng-hide-remove {
+  -webkit-transition:all linear 0.5s;
+  -moz-transition:all linear 0.5s;
+  -o-transition:all linear 0.5s;
+  transition:all linear 0.5s;
+  display:block!important;
+}
+
+.sample-show-hide.ng-hide-add.ng-hide-add-active,
+.sample-show-hide.ng-hide-remove {
+  opacity:0;
+}
+
+.sample-show-hide.ng-hide-add,
+.sample-show-hide.ng-hide-remove.ng-hide-remove-active {
+  opacity:1;
+}
+
+/* End Show Splits */
+/*******************/
+
+.splits-table{
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.75);
+  border: none;
+  
 }
 
 .commit:hover {
@@ -189,4 +244,9 @@ h6 {
 
 .input-group-addon:hover {
   background-color: greenyellow;
+}
+
+.result-message {
+  margin-top: 50px;
+
 }
