@@ -107,16 +107,80 @@ h6 {
   color: red;
 }
 
+.stage {
+  position: relative;
+  height: 148px;
+  transition: all 0.3s;
+}
+
+.stage.focused-on- {
+  /*margin-top: -59px;*/
+}
+
+.distance-input-container, 
+.rate-input-container,
+.duration-input-container {
+  position: absolute;
+  transition: all ease 0.3s;
+}
+
 .distance-input-container {
-  /*width: 10em;*/
+  top: 75px;
+  left: 0%;
 }
 
 .rate-input-container {
-  /*width: 10em;*/
+  top: 75px;
+  left: 33%;
 }
 
 .duration-input-container {
-  /*width: 10em;*/
+  top: 75px;
+  left: 66%;
+}
+
+/* Distance is focused */
+.stage.focused-on-distance .distance-input-container {
+  top: 0px;
+  width: 100%;
+}
+.stage.focused-on-distance .rate-input-container {
+  opacity: 0.5;
+  left: 17%;
+}
+.stage.focused-on-distance .duration-input-container {
+  opacity: 0.5;
+  left: 50%;
+}
+
+/* Rate is focused */
+.stage.focused-on-rate .rate-input-container {
+  top: 0px;
+  width: 100%;
+  left: 0%;
+}
+.stage.focused-on-rate .distance-input-container {
+  opacity: 0.5;
+  left: 17%;
+}
+.stage.focused-on-rate .duration-input-container {
+  opacity: 0.5;
+  left: 50%;
+}
+
+/* Duration is focused */
+.stage.focused-on-duration .duration-input-container {
+  top: 0px;
+  width: 100%;
+  left: 0%;
+}
+.stage.focused-on-duration .distance-input-container {
+  opacity: 0.5;
+  left: 17%;
+}
+.stage.focused-on-duration .rate-input-container {
+  opacity: 0.5;
+  left: 50%;
 }
 
 .commit:hover {
