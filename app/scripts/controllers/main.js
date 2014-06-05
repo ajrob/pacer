@@ -123,8 +123,23 @@ angular.module('pacerApp', ['ui.mask', 'ngAnimate'])
     $scope.runCalculation = function(){
       if(doCalculation()){
         $scope.resultMessage = MessageService.formMessage(_rate.isOperand, rate, _distance, duration, $scope.unit);
+        $scope.splits = calculateSplits(_distance.number, rate.totalSeconds);
       }
     };
+
+    function calculateSplits (distance, rate) {
+      var elapsedTime = rate,
+          splits = [];
+      // Construct splits object
+      for (var i = 1; i <= distance; i++) {
+        splits.push({
+          'mile': i,
+          'elapsedTime': ConversionService.convertSeconds(elapsedTime).toTimeBlock().padded()
+        })
+        elapsedTime += rate
+      }
+      return splits;
+    }
 
     function resetInputVariables(){
       _.each($scope.pacerVariables, function(val){
@@ -132,7 +147,7 @@ angular.module('pacerApp', ['ui.mask', 'ngAnimate'])
         val.number = "";
         val.isDisabled = false;
       });
-    };
+    }
 
     function doCalculation(){
       if(_distance.isOperand && _rate.isOperand){
