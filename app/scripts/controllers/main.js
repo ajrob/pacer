@@ -1,16 +1,11 @@
 'use strict';
 
-angular.module('pacerApp', ['ui.mask', 'ngAnimate'])
+angular.module('pacerApp', ['ngAnimate'])
   .controller('MainCtrl', function ($scope,
-    $filter, 
-    uiMaskConfig,
+    $filter,
     CalculationService,
     ConversionService,
     MessageService) {
-    // uiMaskConfig allows for configuring the types of input
-
-    //Configure uiMaskConfig for hour (H). Do not allow minutes or seconds over 60
-    uiMaskConfig.maskDefinitions['H'] = /[0-5]/;
 
     $scope.paceInputForm = '';
 
@@ -64,6 +59,7 @@ angular.module('pacerApp', ['ui.mask', 'ngAnimate'])
       resetInputVariables();
       $scope.disableCalculation = true;
       $scope.resultMessage = '';
+      $scope.splits = [];
     };
     
     $scope.paceValuesChanged = function(paceVariable){
@@ -94,10 +90,25 @@ angular.module('pacerApp', ['ui.mask', 'ngAnimate'])
         // -->Check "duration" and "rate"
         if(paceVariable == 'duration'){
           // Input: hhmmss 'string' --> Output: seconds
-          duration.totalSeconds = ConversionService.convertTimeBlock($scope.pacerVariables[paceVariable].number).toTotalSeconds;
+          var durationTime = parseDuration($scope.pacerVariables[paceVariable].number);
+          if (durationTime){
+            duration.hours = durationTime[1];
+            duration.minutes = durationTime[2];
+            duration.seconds = durationTime[3];
+          }
+          // duration.totalSeconds = ConversionService.convertTimeBlock($scope.pacerVariables[paceVariable].number).toTotalSeconds;
+          duration.totalSeconds = ConversionService.convertTime(duration.hours, duration.minutes, duration.seconds);
         } else if (paceVariable == 'rate') {
           // Input: min/mi --> Output: seconds/mi
-          rate.totalSeconds = ConversionService.convertTimeBlock($scope.pacerVariables[paceVariable].number).toTotalSeconds;
+          var rateTime = parseRate($scope.pacerVariables[paceVariable].number);
+          if (rateTime) {
+            rate.minutes = rateTime[1];
+            rate.seconds = rateTime[2];
+          }
+          
+          // rate.totalSeconds = ConversionService.convertTimeBlock($scope.pacerVariables[paceVariable].number).toTotalSeconds;
+          rate.totalSeconds = ConversionService.convertTime(0, rate.minutes, rate.seconds);
+
           // Is the user input units set to "minute per mile" (default)?
           // TODO: For now, this will be the only option. In the future, add "mph" as an option.
           //       This will not require the following inverse statement.
@@ -139,6 +150,24 @@ angular.module('pacerApp', ['ui.mask', 'ngAnimate'])
         elapsedTime += rate
       }
       return splits;
+    }
+
+    function parseRate (rate) {
+      try {
+        return rate.match(/^([0-5]?\d):([0-5]\d)$/);
+      }
+      catch (e) {
+        console.log("Rate is not a string: ", e);
+      }
+    }
+
+    function parseDuration (duration) {
+      try {
+        return duration.match(/^(?:(\d+):)?([0-5]\d):([0-5]\d)$/);
+      }
+      catch (e) {
+        console.log("Duration is not a string: ", e);
+      }
     }
 
     function resetInputVariables(){

@@ -27,6 +27,13 @@ angular.module('pacerApp')
     			toTotalSeconds: _totalSeconds
     		}
     	},
+        convertTime: function(hours, minutes, seconds){
+            if (hours) {
+                return (hours * 60 * 60) + (minutes * 60) + (seconds * 1);
+            } else {
+                return (minutes * 60) + (seconds * 1);
+            }
+        },
     	convertSeconds: function(totalSeconds){
     		return {
     			toMinutes: function(){

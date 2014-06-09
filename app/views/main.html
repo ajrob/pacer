@@ -27,14 +27,18 @@
           <label for="rate">Pace</label>
           <div ng-class="{'input-group': activeInput === 'rate'}">
             <input name="rate" type="text" class="form-control pace-input" placeholder="mm:ss"
-              ui-mask="H9:H9"
+              ng-pattern=/^[0-5]?\d:[0-5]\d$/
               ng-model="pacerVariables.rate.number" 
               ng-change="paceValuesChanged('rate')"
               ng-disabled="pacerVariables.rate.isDisabled"
+              ng-class="{'input-error': paceInputForm.rate.$invalid}"
               ng-focus="activeInput = 'rate'"
               ng-blur="activeInput=''">
             <span ng-show="activeInput === 'rate'" class="input-group-addon commit"><i class="fa fa-check"></i></span>
           </div>
+          <span class="error" ng-show="paceInputForm.rate.$invalid">
+          <small>Invalid Pace!</small>
+        </span>
         </div>
       </div>
       <div class="duration-input-container col-md-4">
@@ -42,14 +46,18 @@
           <label for="duration">Duration</label>
           <div ng-class="{'input-group': activeInput === 'duration'}">
             <input name="duration" type="text" class="form-control pace-input" placeholder="hh:mm:ss"
-              ui-mask="99:H9:H9"
+              ng-pattern=/^(\d+:)?([0-5]\d):([0-5]\d)$/
               ng-model="pacerVariables.duration.number"
               ng-change="paceValuesChanged('duration')"
               ng-disabled="pacerVariables.duration.isDisabled"
+              ng-class="{'input-error': paceInputForm.duration.$invalid}"
               ng-focus="activeInput = 'duration'"
               ng-blur="activeInput=''">
             <span ng-show="activeInput === 'duration'" class="input-group-addon commit"><i class="fa fa-check"></i></span>
           </div>
+          <span class="error" ng-show="paceInputForm.duration.$invalid">
+            <small>Invalid duration!</small>
+          </span>
         </div>
       </div>
     </div>
