@@ -8,7 +8,7 @@ body {
   background-image:
     linear-gradient(
       to top right, 
-      #FE981C, #E34200
+      #2DFCB7, #2D5EFC
     );
   height: 100%;
   margin: 0;
@@ -98,7 +98,8 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: 'Questrial';
+  font-family: 'Francois One';
+  color: whitesmoke;
 }
 .pace-input {
   /*margin-top: 20px;
@@ -205,28 +206,22 @@ h6 {
 /***************/
 /* Show splits */
 
-.sample-show-hide {
-  padding:10px;
-  border:1px solid black;
-  background:white;
-}
 
 .sample-show-hide.ng-hide-add, .sample-show-hide.ng-hide-remove {
-  -webkit-transition:all linear 0.5s;
-  -moz-transition:all linear 0.5s;
-  -o-transition:all linear 0.5s;
-  transition:all linear 0.5s;
-  display:block!important;
+  -webkit-transition:height ease 1.5s;
+  -moz-transition:height ease 1.5s;
+  -o-transition:height ease 1.5s;
+  transition:height ease 1.5s;
 }
 
 .sample-show-hide.ng-hide-add.ng-hide-add-active,
 .sample-show-hide.ng-hide-remove {
-  opacity:0;
+  height: 0px;
 }
 
 .sample-show-hide.ng-hide-add,
 .sample-show-hide.ng-hide-remove.ng-hide-remove-active {
-  opacity:1;
+  height: 100px;
 }
 
 /* End Show Splits */
@@ -242,11 +237,47 @@ h6 {
   color: green;
 }
 
+.commit-valid {
+  color: green;
+}
+
+.input-group-addon-valid {
+  background-color: greenyellow;
+}
+
 .input-group-addon:hover {
   background-color: greenyellow;
 }
 
 .result-message {
-  margin-top: 50px;
+  margin-top: 40px;
+  margin-bottom: 40px;
+}
 
+.subtext {
+  color: whitesmoke;
+}
+
+.logo {
+  font-family: 'Lobster';
+  font-size: 70px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  margin: 10px 30px;
+}
+
+.logo-subtext {
+  font-size: 20px;
+  text-align: center;
+}
+
+.main-message {
+  margin-bottom: 30px;
+}
+
+.run-btn {
+  margin: 0 auto;
+  display: block;
+  width: 213px;
 }
