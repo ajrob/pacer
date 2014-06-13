@@ -1,6 +1,12 @@
 <div class="pace-row" ng-controller="MainCtrl">
-  <div class="choice text-center">
-    <h2><strong>Choose one</strong></h2>
+  <div class="logo">Pacer
+    <small class="logo-subtext">a running pace calculator</small>
+  </div>
+  <div class="choice text-center main-message">
+    <h1>
+      <strong>How will you run today?</strong>
+      <h4>Fill out any 2 of the elements below</h4>
+    </h1>
   </div>
 
   <form name="paceInputForm" ng-submit="runCalculation()">
@@ -8,7 +14,7 @@
       <div class="distance-input-container col-md-4">
         <label for="distance">Distance</label>
         <div ng-class="{'input-group': activeInput === 'distance'}">
-          <input name="distance" type="text" class="form-control pace-input" placeholder="Distance"
+          <input name="distance" type="text" class="form-control pace-input" placeholder="miles"
             ng-pattern=/^[0-9]*(\.[0-9]+)?$/
             ng-model="pacerVariables.distance.number"
             ng-change="paceValuesChanged('distance')"
@@ -16,7 +22,16 @@
             ng-class="{'input-error': paceInputForm.distance.$invalid}"
             ng-focus="activeInput = 'distance'"
             ng-blur="activeInput=''">
-          <span ng-show="activeInput === 'distance'" class="input-group-addon commit"><i class="fa fa-check"></i></span>
+          <span class="input-group-addon commit"
+          ng-show="activeInput === 'distance'"
+          ng-class="{ 'commit-valid': paceInputForm.distance.$valid &&
+                                      paceInputForm.distance.$dirty &&
+                                      paceInputForm.distance.$modelValue != '',
+                      'input-group-addon-valid':  paceInputForm.distance.$valid && 
+                                                  paceInputForm.distance.$dirty && 
+                                                  paceInputForm.distance.$modelValue != ''}">
+            <i class="fa fa-check"></i>
+          </span>
         </div>
         <span class="error" ng-show="paceInputForm.distance.$invalid">
           <small>Invalid distance!</small>
@@ -24,7 +39,7 @@
       </div>
       <div class="rate-input-container col-md-4">
         <div class="form-group">
-          <label for="rate">Pace</label>
+          <label for="rate">Pace <small class="subtext">(mm:ss)</small></label>
           <div ng-class="{'input-group': activeInput === 'rate'}">
             <input name="rate" type="text" class="form-control pace-input" placeholder="mm:ss"
               ng-pattern=/^[0-5]?\d:[0-5]\d$/
@@ -34,7 +49,16 @@
               ng-class="{'input-error': paceInputForm.rate.$invalid}"
               ng-focus="activeInput = 'rate'"
               ng-blur="activeInput=''">
-            <span ng-show="activeInput === 'rate'" class="input-group-addon commit"><i class="fa fa-check"></i></span>
+            <span class="input-group-addon commit"
+            ng-show="activeInput === 'rate'"
+            ng-class="{ 'commit-valid': paceInputForm.rate.$valid &&
+                                        paceInputForm.rate.$dirty &&
+                                        paceInputForm.rate.$modelValue != '',
+                        'input-group-addon-valid':  paceInputForm.rate.$valid &&
+                                                    paceInputForm.rate.$dirty &&
+                                                    paceInputForm.rate.$modelValue != ''}">
+              <i class="fa fa-check"></i>
+            </span>
           </div>
           <span class="error" ng-show="paceInputForm.rate.$invalid">
           <small>Invalid Pace!</small>
@@ -43,7 +67,7 @@
       </div>
       <div class="duration-input-container col-md-4">
         <div class="form-group">
-          <label for="duration">Duration</label>
+          <label for="duration">Total Time <small class="subtext">(hh:mm:ss)</small></label>
           <div ng-class="{'input-group': activeInput === 'duration'}">
             <input name="duration" type="text" class="form-control pace-input" placeholder="hh:mm:ss"
               ng-pattern=/^(\d+:)?([0-5]\d):([0-5]\d)$/
@@ -53,7 +77,16 @@
               ng-class="{'input-error': paceInputForm.duration.$invalid}"
               ng-focus="activeInput = 'duration'"
               ng-blur="activeInput=''">
-            <span ng-show="activeInput === 'duration'" class="input-group-addon commit"><i class="fa fa-check"></i></span>
+            <span class="input-group-addon commit"
+            ng-show="activeInput === 'duration'" 
+            ng-class="{ 'commit-valid': paceInputForm.duration.$valid &&
+                                        paceInputForm.duration.$dirty &&
+                                        paceInputForm.duration.$modelValue != '',
+                        'input-group-addon-valid':  paceInputForm.duration.$valid &&
+                                                    paceInputForm.duration.$dirty &&
+                                                    paceInputForm.duration.$modelValue != ''}">
+              <i class="fa fa-check"></i>
+            </span>
           </div>
           <span class="error" ng-show="paceInputForm.duration.$invalid">
             <small>Invalid duration!</small>
@@ -62,8 +95,8 @@
       </div>
     </div>
     <div class="row">
-      <button class="btn btn-default" type="button" ng-click="reset()">Reset</button>
-      <button class="btn btn-success pull-right" type="submit" ng-disabled="disableCalculation">Run!</button>
+      <button class="btn btn-success run-btn" type="submit" ng-disabled="disableCalculation">Run!</button>
+      <button class="btn btn-default pull-right" type="button" ng-click="reset()">Reset</button>
   </div>
   </form>
   
@@ -77,7 +110,7 @@
   <div class="checkbox">
     <label><input type="checkbox" ng-model="showSplits" > Splits</label>
   </div>
-  <div ng-show="showSplits" class="well well-sm splits-table">
+  <div ng-show="showSplits" class="well well-sm splits-table sample-show-hide">
     <table class="table table-striped table-condensed table-bordered">
         <tbody>
           <th>Mile</th>
