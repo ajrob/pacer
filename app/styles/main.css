@@ -7,7 +7,7 @@ body {
   /*background-color: orange;*/
   background-image:
     linear-gradient(
-      to top right, 
+      to top right,
       #2DFCB7, #2D5EFC
     );
   height: 100%;
@@ -130,7 +130,7 @@ h6 {
   /*margin-top: -59px;*/
 }
 
-.distance-input-container, 
+.distance-input-container,
 .rate-input-container,
 .duration-input-container {
   position: absolute;
@@ -203,37 +203,17 @@ h6 {
   left: 50%;
 }
 
-/***************/
-/* Show splits */
-
-
-.sample-show-hide.ng-hide-add, .sample-show-hide.ng-hide-remove {
-  -webkit-transition:height ease 1.5s;
-  -moz-transition:height ease 1.5s;
-  -o-transition:height ease 1.5s;
-  transition:height ease 1.5s;
-}
-
-.sample-show-hide.ng-hide-add.ng-hide-add-active,
-.sample-show-hide.ng-hide-remove {
-  height: 0px;
-}
-
-.sample-show-hide.ng-hide-add,
-.sample-show-hide.ng-hide-remove.ng-hide-remove-active {
-  height: 100px;
-}
-
-/* End Show Splits */
-/*******************/
-
 .splits-table{
   box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.75);
   border: none;
-  
+  color: black;
+}
+.splits-checkbox{
+  display: none;
 }
 
 .commit:hover {
+  cursor: pointer;
   color: green;
 }
 
@@ -280,4 +260,8 @@ h6 {
   margin: 0 auto;
   display: block;
   width: 213px;
+}
+
+.reset-btn {
+  margin-right: 15px;
 }
