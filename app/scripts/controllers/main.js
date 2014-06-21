@@ -8,6 +8,7 @@ angular.module('pacerApp', ['ngAnimate'])
     MessageService) {
 
     $scope.paceInputForm = '';
+    $scope.showSplits = false;
 
     $scope.pacerVariables = {
       distance: {
@@ -60,8 +61,9 @@ angular.module('pacerApp', ['ngAnimate'])
       $scope.disableCalculation = true;
       $scope.resultMessage = '';
       $scope.splits = [];
+      $scope.showSplits = false;
     };
-    
+
     $scope.paceValuesChanged = function(paceVariable){
 
       var numOperands = 0;
@@ -105,7 +107,7 @@ angular.module('pacerApp', ['ngAnimate'])
             rate.minutes = rateTime[1];
             rate.seconds = rateTime[2];
           }
-          
+
           // rate.totalSeconds = ConversionService.convertTimeBlock($scope.pacerVariables[paceVariable].number).toTotalSeconds;
           rate.totalSeconds = ConversionService.convertTime(0, rate.minutes, rate.seconds);
 
@@ -135,6 +137,7 @@ angular.module('pacerApp', ['ngAnimate'])
       if(doCalculation()){
         $scope.resultMessage = MessageService.formMessage(_rate.isOperand, rate, _distance, duration, $scope.unit);
         $scope.splits = calculateSplits(_distance.number, rate.totalSeconds);
+        $scope.showSplits = true;
       }
     };
 
