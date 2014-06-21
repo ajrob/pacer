@@ -208,6 +208,18 @@ h6 {
 
 /* Smaller devices */
 @media (max-width: 992px) {
+  .logo {
+    font-size: 60px;
+  }
+
+  .logo-subtext {
+    font-size: 18px;
+  }
+
+  .main-message h1 {
+    font-size: 32px;
+  }
+
   .col-md-4 {
     width: 100%;
     display: block;
