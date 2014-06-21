@@ -267,20 +267,25 @@ h6 {
 
 .reset-btn {
   margin-right: 15px;
+  margin-bottom: 10px;
 }
 
 /* Smaller devices */
 @media (max-width: 992px) {
   .logo {
-    font-size: 60px;
+    font-size: 50px;
   }
 
   .logo-subtext {
-    font-size: 18px;
+    font-size: 16px;
   }
 
   .main-message h1 {
-    font-size: 32px;
+    font-size: 26px;
+  }
+
+  .main-message h4 {
+    font-size: 16px;
   }
 
   .col-md-4 {
