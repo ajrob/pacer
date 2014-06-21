@@ -1,4 +1,8 @@
 /* Space out content a bit */
+* {
+  box-sizing: border-box;
+}
+
 html {
   height: 100%;
 }
@@ -186,7 +190,6 @@ h6 {
 }
 
 /* Duration is focused */
-
 .stage.focused-on-duration .duration-input-container {
   top: 0px;
   width: 100%;
@@ -202,6 +205,87 @@ h6 {
   opacity: 0.5;
   left: 50%;
 }
+
+/* Smaller devices */
+@media (max-width: 992px) {
+  .col-md-4 {
+    width: 100%;
+    display: block;
+    position: relative;
+    left: 0;
+  }
+
+  .stage {
+    height: 225px;
+  }
+
+  .distance-input-container,
+  .rate-input-container,
+  .duration-input-container {
+    /*position: absolute;*/
+    transition: all ease 0.3s;
+  }
+
+  /* Distance is focused */
+  .stage.focused-on-distance .distance-input-container {
+    top: 0px;
+    width: 100%;
+    position: absolute;
+  }
+  .stage.focused-on-distance .rate-input-container {
+    top: 75px;
+    opacity: 0.5;
+    left: 0%;
+    position: absolute;
+  }
+  .stage.focused-on-distance .duration-input-container {
+    top: 150px;
+    opacity: 0.5;
+    left: 0%;
+    position: absolute;
+  }
+
+  /* Rate is focused */
+  .stage.focused-on-rate .rate-input-container {
+    top: 0px;
+    width: 100%;
+    position: absolute;
+  }
+  .stage.focused-on-rate .distance-input-container {
+    top: 75px;
+    opacity: 0.5;
+    left: 0%;
+    position: absolute;
+  }
+  .stage.focused-on-rate .duration-input-container {
+    top: 150px;
+    opacity: 0.5;
+    left: 0%;
+    position: absolute;
+  }
+
+  /* Duration is focused */
+
+  .stage.focused-on-duration .duration-input-container {
+    top: 0px;
+    width: 100%;
+    position: absolute;
+  }
+  .stage.focused-on-duration .distance-input-container {
+    top: 75px;
+    opacity: 0.5;
+    left: 0%;
+    position: absolute;
+  }
+  .stage.focused-on-duration .rate-input-container {
+    top: 150px;
+    opacity: 0.5;
+    left: 0%;
+    position: absolute;
+  }
+}
+
+
 
 .splits-table{
   box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.75);

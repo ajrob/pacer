@@ -11,33 +11,35 @@
 
   <form name="paceInputForm" ng-submit="runCalculation()">
     <div class="row focused-on-{{activeInput}} stage">
-      <div class="distance-input-container col-md-4">
-        <label for="distance">Distance</label>
-        <div ng-class="{'input-group': activeInput === 'distance'}">
-          <input name="distance" type="text" class="form-control pace-input" placeholder="miles"
-            ng-pattern=/^[0-9]*(\.[0-9]+)?$/
-            ng-model="pacerVariables.distance.number"
-            ng-change="paceValuesChanged('distance')"
-            ng-disabled="pacerVariables.distance.isDisabled"
-            ng-class="{'input-error': paceInputForm.distance.$invalid}"
-            ng-focus="activeInput = 'distance'"
-            ng-blur="activeInput=''">
-          <span class="input-group-addon commit"
-          ng-show="activeInput === 'distance'"
-          ng-class="{ 'commit-valid': paceInputForm.distance.$valid &&
-                                      paceInputForm.distance.$dirty &&
-                                      paceInputForm.distance.$modelValue != '',
-                      'input-group-addon-valid':  paceInputForm.distance.$valid &&
-                                                  paceInputForm.distance.$dirty &&
-                                                  paceInputForm.distance.$modelValue != ''}">
-            <i class="fa fa-check"></i>
-          </span>
+      <div class="col-md-4 distance-input-container">
+        <div class="form-group">
+          <label for="distance">Distance</label>
+          <div ng-class="{'input-group': activeInput === 'distance'}">
+            <input name="distance" type="text" class="form-control pace-input" placeholder="miles"
+              ng-pattern=/^[0-9]*(\.[0-9]+)?$/
+              ng-model="pacerVariables.distance.number"
+              ng-change="paceValuesChanged('distance')"
+              ng-disabled="pacerVariables.distance.isDisabled"
+              ng-class="{'input-error': paceInputForm.distance.$invalid}"
+              ng-focus="activeInput = 'distance'"
+              ng-blur="activeInput=''">
+            <span class="input-group-addon commit"
+            ng-show="activeInput === 'distance'"
+            ng-class="{ 'commit-valid': paceInputForm.distance.$valid &&
+                                        paceInputForm.distance.$dirty &&
+                                        paceInputForm.distance.$modelValue != '',
+                        'input-group-addon-valid':  paceInputForm.distance.$valid &&
+                                                    paceInputForm.distance.$dirty &&
+                                                    paceInputForm.distance.$modelValue != ''}">
+              <i class="fa fa-check"></i>
+            </span>
+          </div>
         </div>
         <span class="error" ng-show="paceInputForm.distance.$invalid">
           <small>Invalid distance!</small>
         </span>
       </div>
-      <div class="rate-input-container col-md-4">
+      <div class="col-md-4 rate-input-container">
         <div class="form-group">
           <label for="rate">Pace <small class="subtext">(mm:ss)</small></label>
           <div ng-class="{'input-group': activeInput === 'rate'}">
@@ -65,7 +67,7 @@
         </span>
         </div>
       </div>
-      <div class="duration-input-container col-md-4">
+      <div class="col-md-4 duration-input-container">
         <div class="form-group">
           <label for="duration">Total Time <small class="subtext">(hh:mm:ss)</small></label>
           <div ng-class="{'input-group': activeInput === 'duration'}">
