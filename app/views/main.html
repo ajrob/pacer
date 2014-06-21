@@ -15,7 +15,7 @@
         <div class="form-group">
           <label for="distance">Distance</label>
           <div ng-class="{'input-group': activeInput === 'distance'}">
-            <input name="distance" type="text" class="form-control pace-input" placeholder="miles"
+            <input name="distance" type="number" class="form-control pace-input" placeholder="miles"
               ng-pattern=/^[0-9]*(\.[0-9]+)?$/
               ng-model="pacerVariables.distance.number"
               ng-change="paceValuesChanged('distance')"
