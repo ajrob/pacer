@@ -123,9 +123,10 @@ h6 {
     /* ----- End Table display animation----- */
 
 .slide-animation {
-  transition: 0.5s all ease-in;
+  transition: 0.45s all ease-in;
 }
 .slide-animation.ng-hide {
+  transform: translateX(-2000px);
   opacity: 0;
 }
 /* ----- Animation definitions ----- */
