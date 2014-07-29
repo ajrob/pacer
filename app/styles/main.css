@@ -105,6 +105,36 @@ h6 {
   font-family: 'Francois One';
   color: whitesmoke;
 }
+
+/* ----- Animation definitions ----- */
+    /* ----- Table display animation ----- */
+.reveal-animation.ng-enter {
+  transition: 1.0s;
+  opacity: 0;
+}
+
+.reveal-animation.ng-enter-stagger {
+  transition-delay: 0.05s;
+}
+
+.reveal-animation.ng-enter.ng-enter-active {
+  opacity: 1;
+}
+    /* ----- End Table display animation----- */
+
+.slide-animation {
+  transition: 0.5s all ease-in;
+}
+.slide-animation.ng-hide {
+  opacity: 0;
+}
+/* ----- Animation definitions ----- */
+
+.input-group .start-time-input {
+  float: right;
+  width: 20%;
+}
+
 .pace-input {
   /*margin-top: 20px;
   margin-bottom: 20px;*/
@@ -235,6 +265,7 @@ h6 {
 .result-message {
   margin-top: 40px;
   margin-bottom: 40px;
+  color: midnightblue;
 }
 
 .subtext {
@@ -266,8 +297,15 @@ h6 {
 }
 
 .reset-btn {
-  margin-right: 15px;
-  margin-top: 10px;
+  position: absolute;
+  right: 20px;
+  top: 0;
+}
+
+.button-row {
+  position: relative;
+  padding-left: 15px;
+  padding-right: 15px;
 }
 
 /* Smaller devices */

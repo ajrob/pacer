@@ -33,6 +33,8 @@ angular.module('pacerApp', ['ngAnimate'])
       rate: "min/mi"
     }
 
+    $scope.startForm = '';
+
     var _distance = $scope.pacerVariables.distance,
         _rate = $scope.pacerVariables.rate,
         _duration = $scope.pacerVariables.duration;
@@ -141,15 +143,36 @@ angular.module('pacerApp', ['ngAnimate'])
       }
     };
 
+    $scope.setStartTime = function (startTime) {
+      $scope.timeMoment = moment(startTime, "hh:mm a");
+      $scope.runCalculation();
+    }
+
+    $scope.hasStartTime = function(){
+      return $scope.startTime != '';
+    }
+
     function calculateSplits (distance, rate) {
       var elapsedTime = rate,
-          splits = [];
+          splits = [],
+          timeOfDay = $scope.timeMoment;
       // Construct splits object
       for (var i = 1; i <= distance; i++) {
+        timeOfDay = moment($scope.timeMoment).add('seconds', elapsedTime).format("hh:mm a");
         splits.push({
           'mile': i,
-          'elapsedTime': ConversionService.convertSeconds(elapsedTime).toTimeBlock().padded()
-        })
+          'elapsedTime': ConversionService.convertSeconds(elapsedTime).toTimeBlock().padded(),
+          'timeOfDay': timeOfDay
+        });
+        if ((distance - i) < 1 && (distance - i) > 0) {
+          //You're at the end and there's a remainder
+          elapsedTime += (distance - i) * rate;
+          splits.push({
+            'mile': distance,
+            'elapsedTime': ConversionService.convertSeconds(elapsedTime).toTimeBlock().padded(),
+            'timeOfDay': 0
+          });
+        }
         elapsedTime += rate
       }
       return splits;
