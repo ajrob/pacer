@@ -15,7 +15,7 @@
         <div class="form-group">
           <label for="distance">Distance</label>
           <div ng-class="{'input-group': activeInput === 'distance'}">
-            <input name="distance" type="number" class="form-control pace-input" placeholder="miles"
+            <input name="distance" type="text" class="form-control pace-input" placeholder="miles"
               ng-pattern=/^[0-9]*(\.[0-9]+)?$/
               ng-model="pacerVariables.distance.number"
               ng-change="paceValuesChanged('distance')"
@@ -96,33 +96,46 @@
         </div>
       </div>
     </div>
-    <div class="row">
+    <div class="row button-row">
       <button class="btn btn-success run-btn" type="submit" ng-disabled="disableCalculation">Run!</button>
       <button class="btn btn-default reset-btn pull-right" type="button" ng-click="reset()">Reset</button>
   </div>
   </form>
+  <h4 class="text-center result-message">{{ resultMessage }}</h4>
 
-  <!-- <div class="well well-lg" ng-show="resultMessage"> -->
-    <h4 class="text-center result-message">{{ resultMessage }}</h4>
-    <!-- <h4>Distance: <small>{{ pacerVariables.distance.number }}</small></h4> -->
-    <!-- <h4>Rate: <small>{{ pacerVariables.rate.number }}</small></h4> -->
-    <!-- <h4>Duration: <small>{{ pacerVariables.duration.number }}</small></h4> -->
-  <!-- </div> -->
-
-  <!-- <div class="checkbox">
+<!-- For debugging -->
+<!--   <div class="checkbox">
     <label><input type="checkbox" class="splits-checkbox" ng-model="showSplits" > Splits</label>
   </div> -->
-  <div ng-show="showSplits" class="well well-sm splits-table">
-    <table class="table table-striped table-condensed table-bordered">
-        <tbody>
-          <th>Mile</th>
-          <th>Elapsed Time</th>
-          <tr ng-repeat="split in splits">
-            <td>{{ split.mile }}</td>
-            <td>{{ split.elapsedTime }}</td>
-          </tr>
-        </tbody>
-      </table>
+
+  <div ng-show="showSplits" class="slide-animation">
+    <div class="startTimeInput" style="color:black">
+      <form ng-submit="setStartTime(startTime)" class="form-group">
+        <div class="input-group">
+          <input type="text" placeholder="Start Time" class="start-time-input form-control"
+                 ng-model="startTime">
+          <span class="input-group-addon commit" ng-click="setStartTime(startTime)">
+            <i class="fa fa-plus"></i>
+          </span>
+        </div>
+      </form>
+    </div>
+    <div class="well well-sm splits-table">
+      <table class="table table-striped table-condensed table-bordered">
+          <tbody>
+            <tr>
+              <th>Mile</th>
+              <th>Elapsed Time</th>
+              <th ng-show="hasStartTime()" class="reveal-animation">Time of Day</th>
+            </tr>
+            <tr ng-repeat="split in splits" class="reveal-animation">
+              <td>{{ split.mile }}</td>
+              <td>{{ split.elapsedTime }}</td>
+              <td ng-show="hasStartTime()">{{ split.timeOfDay }}</td>
+            </tr>
+          </tbody>
+        </table>
+    </div>
   </div>
 
 </div>
