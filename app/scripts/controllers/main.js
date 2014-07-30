@@ -144,7 +144,7 @@ angular.module('pacerApp', ['ngAnimate'])
     };
 
     $scope.setStartTime = function (startTime) {
-      $scope.timeMoment = moment(startTime, "hh:mm a");
+      $scope.timeMoment = moment(startTime, "h:mm a");
       $scope.runCalculation();
     }
 
@@ -158,7 +158,7 @@ angular.module('pacerApp', ['ngAnimate'])
           timeOfDay = $scope.timeMoment;
       // Construct splits object
       for (var i = 1; i <= distance; i++) {
-        timeOfDay = moment($scope.timeMoment).add('seconds', elapsedTime).format("hh:mm a");
+        timeOfDay = moment($scope.timeMoment).add('seconds', elapsedTime).format("h:mm a");
         splits.push({
           'mile': i,
           'elapsedTime': ConversionService.convertSeconds(elapsedTime).toTimeBlock().padded(),

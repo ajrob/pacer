@@ -129,6 +129,16 @@ h6 {
   transform: translateX(-2000px);
   opacity: 0;
 }
+
+.pulse {
+  animation: pulseAnimation ease 0.25s;
+  animation-delay: 1s;
+}
+@-webkit-keyframes pulseAnimation {
+  50% { transform: scale(1.15); }
+  100% { transform: scale(1); }
+}
+
 /* ----- End Animation definitions ----- */
 
 .input-group .start-time-input {
@@ -295,6 +305,11 @@ h6 {
   margin: 0 auto;
   display: block;
   width: 213px;
+}
+
+.run-btn-active {
+  box-shadow: 0 0 10px -2px black;
+  background-color: #4DD54D;
 }
 
 .reset-btn {

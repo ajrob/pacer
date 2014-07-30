@@ -97,11 +97,11 @@
       </div>
     </div>
     <div class="row button-row">
-      <button class="btn btn-success run-btn" type="submit" ng-disabled="disableCalculation">Run!</button>
+      <button class="btn btn-success run-btn" ng-class="{ 'run-btn-active': !disableCalculation }" type="submit" ng-disabled="disableCalculation">Run!</button>
       <button class="btn btn-default reset-btn pull-right" type="button" ng-click="reset()">Reset</button>
   </div>
   </form>
-  <h4 class="text-center result-message">{{ resultMessage }}</h4>
+  <h4 ng-show="showSplits" class="text-center result-message pulse">{{ resultMessage }}</h4>
 
 <!-- For debugging -->
 <!--   <div class="checkbox">
