@@ -123,12 +123,13 @@ h6 {
     /* ----- End Table display animation----- */
 
 .slide-animation {
-  transition: 0.45s all ease-in;
+  transition: 0.25s all ease-in;
 }
 .slide-animation.ng-hide {
   transform: translateX(-2000px);
   opacity: 0;
 }
+/* ----- Animation definitions ----- */
 
 .pulse {
   animation: pulseAnimation ease 0.25s;
@@ -139,11 +140,25 @@ h6 {
   100% { transform: scale(1); }
 }
 
+.shift-up-animation {
+  transition: 0.45s all ease-in-out;
+}
+/*.shift-up-animation.ng-remove*/
+
 /* ----- End Animation definitions ----- */
+
+.pace-row.calculated {
+  margin-top: 20%;
+}
 
 .input-group .start-time-input {
   float: right;
   width: 20%;
+}
+
+.run-btn-active {
+  box-shadow: 0 0 10px -2px black;
+  background-color: #4DD54D;
 }
 
 .pace-input {
@@ -251,6 +266,7 @@ h6 {
   box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.75);
   border: none;
   color: black;
+  background-color: rgba(255, 255, 255, 0.5);
 }
 .splits-checkbox{
   display: none;
@@ -305,11 +321,6 @@ h6 {
   margin: 0 auto;
   display: block;
   width: 213px;
-}
-
-.run-btn-active {
-  box-shadow: 0 0 10px -2px black;
-  background-color: #4DD54D;
 }
 
 .reset-btn {
