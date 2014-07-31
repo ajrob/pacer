@@ -132,8 +132,8 @@ h6 {
 /* ----- Animation definitions ----- */
 
 .pulse {
-  animation: pulseAnimation ease 0.25s;
-  animation-delay: 1s;
+  -webkit-animation: pulseAnimation ease 0.25s;
+  -webkit-animation-delay: 1s;
 }
 @-webkit-keyframes pulseAnimation {
   50% { transform: scale(1.15); }
